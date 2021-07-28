@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/OderDetailsAPI/bin/Debug/net5.0
+/OderDetailsAPI/obj/Debug/net5.0
+/OderDetailsAPI/obj
+/OrderDetailsAPI.Test/obj

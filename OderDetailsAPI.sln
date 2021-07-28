@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OderDetailsAPI", "OderDetailsAPI\OderDetailsAPI.csproj", "{A0B08412-1E92-4E87-9D11-60E0A5696C98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDetailsAPI.Test", "OrderDetailsAPI.Test\OrderDetailsAPI.Test.csproj", "{A3A80AE6-322F-4D4E-8546-651D964D71CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0B08412-1E92-4E87-9D11-60E0A5696C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B08412-1E92-4E87-9D11-60E0A5696C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B08412-1E92-4E87-9D11-60E0A5696C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B08412-1E92-4E87-9D11-60E0A5696C98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3A80AE6-322F-4D4E-8546-651D964D71CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3A80AE6-322F-4D4E-8546-651D964D71CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3A80AE6-322F-4D4E-8546-651D964D71CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3A80AE6-322F-4D4E-8546-651D964D71CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF0F7BAE-6F25-4969-B3C9-9B74D42ECBDC}
+	EndGlobalSection
+EndGlobal
