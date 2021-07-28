@@ -37,7 +37,7 @@ namespace OderDetailsAPI.Controllers
             try
             {
                 if (string.IsNullOrEmpty(customerRequestDetails?.User))
-                    return BadRequest($"Invalid Customer Request Details. Request object is empty or Email address is empty!!");
+                    return BadRequest("Invalid Customer Request Details. Request object is empty or Email address is empty!!");
 
                 var customerDetails = await _customerAccountDetailsService.GetCustomerDetails(customerRequestDetails.User);
 
