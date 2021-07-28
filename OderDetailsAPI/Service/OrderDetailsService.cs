@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OderDetailsAPI.Data;
 using OderDetailsAPI.Models;
 using System;
@@ -10,30 +11,36 @@ namespace OderDetailsAPI.Service
 {
     public class OrderDetailsService : IOrderDetailsService
     {
-        private SSE_TestContext _sSE_TestContext;
+        private readonly SSE_TestContext _sSE_TestContext;
+        private readonly ILogger<OrderDetailsService> _logger;
 
-        public OrderDetailsService(SSE_TestContext sSE_TestContext)
+        public OrderDetailsService(SSE_TestContext sSE_TestContext, ILogger<OrderDetailsService> logger)
         {
             _sSE_TestContext = sSE_TestContext;
+            _logger = logger;
         }
 
         public async Task<CustomerOrderDetails> GetCustomerRecentOrderDetails(CustomerDetails customerDetails)
         {
+            try
+            {
+                var order = await _sSE_TestContext.Orders.Where(a => a.Customerid == customerDetails.CustomerId)
+                                                         .OrderByDescending(x => x.Orderdate).FirstOrDefaultAsync();
 
-            var order = await _sSE_TestContext.Orders.Where(a => a.Customerid == customerDetails.CustomerId)
-                                                     .OrderByDescending(x => x.Orderdate).FirstOrDefaultAsync();
+                if (order == null)
+                    return BuildCustomerDetails(customerDetails);
 
-            if (order == null)
-                return BuildCustomerDetails(customerDetails);
+                var orderitems = await _sSE_TestContext.Orderitems.Where(a => a.Orderid == order.Orderid)
+                                                                  .Include(x => x.Product)
+                                                                  .ToListAsync();
 
-            var orderitems = await _sSE_TestContext.Orderitems.Where(a => a.Orderid == order.Orderid)
-                                                              .Include(x => x.Product)
-                                                              .ToListAsync();
-
-            return BuildCustomerDetails(customerDetails, order, orderitems);
-
-
-            throw new NotImplementedException();
+                return BuildCustomerDetails(customerDetails, order, orderitems);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, $"Exception while Fetching order details for user {customerDetails?.CustomerId}");
+                throw;
+            }
         }
 
         private CustomerOrderDetails BuildCustomerDetails(CustomerDetails customerDetails, Order order = null, List<Orderitem> orderitems = null) => new()
