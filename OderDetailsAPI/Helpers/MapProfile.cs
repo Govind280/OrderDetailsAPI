@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
 using OderDetailsAPI.Data;
 using OderDetailsAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OderDetailsAPI.Helpers
 {
+    /* To be implemented in Future */
     public class MapProfile : Profile
     {
         /// <summary>

@@ -9,17 +9,30 @@ using System.Threading.Tasks;
 
 namespace OderDetailsAPI.Service
 {
+    /// <summary>
+    /// Service class for <see cref="OrderDetailsService"/>
+    /// </summary>
     public class OrderDetailsService : IOrderDetailsService
     {
         private readonly SSE_TestContext _sSE_TestContext;
         private readonly ILogger<OrderDetailsService> _logger;
 
+        /// <summary>
+        /// Constructor for <see cref="OrderDetailsService"/>
+        /// </summary>
+        /// <param name="sSE_TestContext"><see cref="SSE_TestContext"/></param>
+        /// <param name="logger"><see cref="ILogger"/></param>
         public OrderDetailsService(SSE_TestContext sSE_TestContext, ILogger<OrderDetailsService> logger)
         {
             _sSE_TestContext = sSE_TestContext;
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get's Customer recent order details
+        /// </summary>
+        /// <param name="customerDetails"><see cref="CustomerDetails"/></param>
+        /// <returns><see cref="CustomerOrderDetails"/></returns>
         public async Task<CustomerOrderDetails> GetCustomerRecentOrderDetails(CustomerDetails customerDetails)
         {
             try
@@ -62,30 +75,24 @@ namespace OderDetailsAPI.Service
 
         private List<OrderItemsDto> MapOrderItems(List<Orderitem> orderitems, bool? containsGift)
         {
-            if (orderitems != null && orderitems.Any())
-            {
-                List<OrderItemsDto> orderItemsdtoCollection = new List<OrderItemsDto>();
-
-                OrderItemsDto orderItemsDto;
-
-                foreach (var item in orderitems)
-                {
-                    orderItemsDto = new()
-                    {
-                        Product = containsGift.HasValue && containsGift.Value ? "Gift" : item.Product?.Productname,
-                        PriceEach = item.Price,
-                        Quantity = item.Quantity
-                    };
-
-                    orderItemsdtoCollection.Add(orderItemsDto);
-                }
-
-                return orderItemsdtoCollection;
-            }
-            else
-            {
+            if (orderitems == null || !orderitems.Any())
                 return null;
+            
+            List<OrderItemsDto> orderItemsdtoCollection = new List<OrderItemsDto>();
+
+            foreach (var item in orderitems)
+            {
+                OrderItemsDto orderItemsDto = new()
+                {
+                    Product = containsGift.HasValue && containsGift.Value ? "Gift" : item.Product?.Productname,
+                    PriceEach = item.Price,
+                    Quantity = item.Quantity
+                };
+
+                orderItemsdtoCollection.Add(orderItemsDto);
             }
+
+            return orderItemsdtoCollection;
         }
     }
 }

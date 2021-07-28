@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-#nullable disable
+﻿#nullable disable
 
 namespace OderDetailsAPI.Data
 {
@@ -13,7 +10,6 @@ namespace OderDetailsAPI.Data
         public int? Quantity { get; set; }
         public decimal? Price { get; set; }
         public bool? Returnable { get; set; }
-
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }

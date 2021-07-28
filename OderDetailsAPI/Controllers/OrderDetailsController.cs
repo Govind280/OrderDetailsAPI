@@ -3,14 +3,13 @@ using Microsoft.Extensions.Logging;
 using OderDetailsAPI.Models;
 using OderDetailsAPI.Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OderDetailsAPI.Controllers
 {
+    /// <summary>
+    /// Controller for <see cref="OrderDetailsController"/>
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class OrderDetailsController : ControllerBase
@@ -19,6 +18,12 @@ namespace OderDetailsAPI.Controllers
         private readonly IOrderDetailsService _orderDetailsService;
         private readonly ILogger<OrderDetailsController> _logger;
 
+        /// <summary>
+        /// Constructor for <see cref="OrderDetailsController"/>
+        /// </summary>
+        /// <param name="customerAccountDetailsService"><see cref="ICustomerAccountDetailsService"/></param>
+        /// <param name="orderDetailsService"><see cref="IOrderDetailsService"/></param>
+        /// <param name="logger"><see cref="ILogger"/></param>
         public OrderDetailsController(
             ICustomerAccountDetailsService customerAccountDetailsService,
             IOrderDetailsService orderDetailsService,
@@ -30,6 +35,11 @@ namespace OderDetailsAPI.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get's Customers recent order details
+        /// </summary>
+        /// <param name="customerRequestDetails"><see cref="CustomerRequestDetails"/></param>
+        /// <returns>Customer recent order details</returns>
         // POST api/<OrderDetails>
         [HttpPost]
         public async Task<IActionResult> RecentOrderDetails([FromBody] CustomerRequestDetails customerRequestDetails)
